@@ -118,21 +118,24 @@ Adapters and node toml files to implement the API are available on github
 
 Truflation data is fully available on Base, with cross-chain access supported via Chainlink CCIP.
 
-**Note:** As of December 2025, specific Chainlink "Any API" oracle/job IDs for Truflation indexes directly on Base mainnet are not yet publicly listed in this repo. Modern integrations often use Chainlink Data Streams or API calls. Check these resources for the latest:
+**Note:** As of December 2025, the legacy Chainlink "Any API" style (with fixed job IDs) used in this quickstart is primarily for testnets. On Base mainnet, Truflation recommends modern **Chainlink Data Streams** or custom streams via the Marketplace.
 
-- Truflation Marketplace (data stream IDs): https://marketplace.truflation.com/
-- Chainlink Data Streams docs: https://docs.chain.link/data-streams
-- Chainlink CCIP (cross-chain): https://docs.chain.link/ccip
+For the latest Base-compatible configurations:
+- [Truflation Marketplace](https://marketplace.truflation.com/) – Select your data stream, chain (Base), and copy the oracle address/job ID if needed.
+- [Chainlink Data Streams docs](https://docs.chain.link/data-streams)
+- [Chainlink CCIP docs](https://docs.chain.link/ccip) (for cross-chain)
 
 ### Quick Steps:
 1. Use Remix or Hardhat with Base network config.
-2. In `TruflationTester.sol`, update with the latest parameters from the resources above.
-3. Fund your contract with LINK on Base (use faucets for testnet or bridges for mainnet).
+2. Open `TruflationTester.sol` and update the oracle parameters:
+   - Go to the Marketplace link above, select your index and Base chain.
+   - Copy the provided **oracle address** and **job ID**.
+   - Paste them into the contract (replace the placeholders in the `requestYoYInflation` function or constructor).
+3. Fund your contract with LINK on Base (use faucets for testnet like Base Sepolia, or bridges for mainnet).
 4. Example Hardhat network config (add to your `hardhat.config.js`):
    ```js
    base: {
      url: "https://mainnet.base.org",
      accounts: [process.env.PRIVATE_KEY],
      chainId: 8453  // Use 84532 for Base Sepolia testnet
-   }
    }
