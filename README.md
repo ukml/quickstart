@@ -129,7 +129,7 @@ For the latest configurations:
 1. Use Remix or Hardhat with Base network config (example below).
 2. When deploying the contract (constructor: address oracleId_, string jobId_, uint256 fee_, address token_):
    - Get oracle address and job ID from the Truflation Marketplace (select index + Base chain).
-   - Fee: 0.1 - 0.5 LINK (in wei, e.g., 0.1 LINK = 100000000000000000).
+   - Fee: 0.1 – 0.5 LINK (in wei, e.g., 0.1 LINK = 100000000000000000).
    - LINK token address (official Chainlink):
      - Mainnet: 0x88Fb150BDc53A65fe94Dea0c9BA0a6dAf8C6e196
      - Testnet (Base Sepolia): 0xE4aB69C077896252FAFBD49EFD26B5D171A32410
