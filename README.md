@@ -116,15 +116,23 @@ Adapters and node toml files to implement the API are available on github
 * [Using solt to get a contract on etherscan](https://blog.jubb.xyz/post/solt-release/)
 ## Deploying on Base (Coinbase's Layer 2)
 
-Truflation data is fully available on Base via Chainlink CCIP for cross-chain queries.
+Truflation data is fully available on Base, with cross-chain access supported via Chainlink CCIP.
+
+**Note:** As of December 2025, specific Chainlink "Any API" oracle/job IDs for Truflation indexes directly on Base mainnet are not yet publicly listed in this repo. Modern integrations often use Chainlink Data Streams or API calls. Check these resources for the latest:
+
+- Truflation Marketplace (data stream IDs): https://marketplace.truflation.com/
+- Chainlink Data Streams docs: https://docs.chain.link/data-streams
+- Chainlink CCIP (cross-chain): https://docs.chain.link/ccip
 
 ### Quick Steps:
 1. Use Remix or Hardhat with Base network config.
-2. In `TruflationTester.sol`, ensure you're using the latest Chainlink oracle addresses for Base.
-3. Fund your contract with LINK on Base (get from faucets or bridges).
-4. Example network config (add to your hardhat.config.js):
+2. In `TruflationTester.sol`, update with the latest parameters from the resources above.
+3. Fund your contract with LINK on Base (use faucets for testnet or bridges for mainnet).
+4. Example Hardhat network config (add to your `hardhat.config.js`):
    ```js
    base: {
      url: "https://mainnet.base.org",
-     accounts: [process.env.PRIVATE_KEY]
+     accounts: [process.env.PRIVATE_KEY],
+     chainId: 8453  // Use 84532 for Base Sepolia testnet
+   }
    }
