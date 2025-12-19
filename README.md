@@ -130,8 +130,10 @@ For the latest Base-compatible configurations:
 2. Open `TruflationTester.sol` and update the oracle parameters:
    - Go to the Marketplace link above, select your index and Base chain.
    - Copy the provided **oracle address** and **job ID**.
-   - Paste them into the contract (replace the placeholders in the `requestYoYInflation` function or constructor).
-3. Fund your contract with LINK on Base (use faucets for testnet like Base Sepolia, or bridges for mainnet).
+   - Paste them into the contract (typically in the constructor parameters or in the Chainlink request setup function, replacing any placeholders).
+3. Fund your contract with LINK on Base:
+   - For testnet (Base Sepolia): Use the [Chainlink Faucet](https://faucets.chain.link/base-sepolia) (provides test LINK and ETH).
+   - For mainnet: Bridge LINK from Ethereum or other chains using a trusted bridge like [Base Official Bridge](https://bridge.base.org/) or third-party options.
 4. Example Hardhat network config (add to your `hardhat.config.js`):
    ```js
    base: {
