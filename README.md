@@ -118,23 +118,27 @@ Adapters and node toml files to implement the API are available on github
 
 Truflation data is fully available on Base, with cross-chain access supported via Chainlink CCIP.
 
-**Note:** As of December 2025, the legacy Chainlink "Any API" style (with fixed job IDs) used in this quickstart is primarily for testnets. On Base mainnet, Truflation recommends modern **Chainlink Data Streams** or custom streams via the Marketplace.
+**Note:** As of December 2025, the legacy Chainlink "Any API" style (with fixed job IDs) in this quickstart is primarily for testnets. On Base mainnet, Truflation recommends modern **Chainlink Data Streams** or custom streams via the Marketplace for low-latency, production use.
 
-For the latest Base-compatible configurations:
-- [Truflation Marketplace](https://marketplace.truflation.com/) – Select your data stream, chain (Base), and copy the oracle address/job ID if needed.
+For the latest configurations:
+- [Truflation Marketplace](https://marketplace.truflation.com/) – Select your data stream and Base chain to get custom oracle/job details if needed.
 - [Chainlink Data Streams docs](https://docs.chain.link/data-streams)
-- [Chainlink CCIP docs](https://docs.chain.link/ccip) (for cross-chain)
+- [Chainlink CCIP docs](https://docs.chain.link/ccip)
 
-### Quick Steps:
-1. Use Remix or Hardhat with Base network config.
-2. Open `TruflationTester.sol` and update the oracle parameters:
-   - Go to the Marketplace link above, select your index and Base chain.
-   - Copy the provided **oracle address** and **job ID**.
-   - Paste them into the contract (typically in the constructor parameters or in the Chainlink request setup function, replacing any placeholders).
-3. Fund your contract with LINK on Base:
-   - For testnet (Base Sepolia): Use the [Chainlink Faucet](https://faucets.chain.link/base-sepolia) (provides test LINK and ETH).
-   - For mainnet: Bridge LINK from Ethereum or other chains using a trusted bridge like [Base Official Bridge](https://bridge.base.org/) or third-party options.
-4. Example Hardhat network config (add to your `hardhat.config.js`):
+### Quick Steps for TruflationTester.sol on Base:
+1. Use Remix or Hardhat with Base network config (example below).
+2. When deploying the contract:
+   - Pass parameters to the **constructor** (address oracleId_, string jobId_, uint256 fee_, address token_).
+   - Get oracle address and job ID from the Truflation Marketplace (select index + Base chain).
+   - Use fee: 0.1 - 0.5 LINK (in wei, e.g., 100000000000000000 for 0.1 LINK – common for requests).
+   - LINK token address:
+     - Mainnet: 0x88Fb150BDc53A65fe94Dea0c9BA0a6dAf8C6e196
+     - Testnet (Base Sepolia): 0xE4aB69C077896252FAFBD49EFD26B5D171A32410
+3. Fund your deployed contract with LINK:
+   - Testnet (Base Sepolia): Use the [Chainlink Faucet](https://faucets.chain.link/base-sepolia) (provides test LINK + ETH).
+   - Mainnet: Bridge LINK using the [official Base Bridge](https://bridge.base.org/deposit) or other trusted bridges.
+4. Call `requestYoyInflation()` on the deployed contract to fetch data.
+5. Example Hardhat network config (add to your `hardhat.config.js`):
    ```js
    base: {
      url: "https://mainnet.base.org",
