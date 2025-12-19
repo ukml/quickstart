@@ -114,3 +114,17 @@ Adapters and node toml files to implement the API are available on github
 * [Truflation discord developer chat](https://discord.com/channels/967280164071407666/968071680360587264)
 * [Network endpoints](network.md)
 * [Using solt to get a contract on etherscan](https://blog.jubb.xyz/post/solt-release/)
+## Deploying on Base (Coinbase's Layer 2)
+
+Truflation data is fully available on Base via Chainlink CCIP for cross-chain queries.
+
+### Quick Steps:
+1. Use Remix or Hardhat with Base network config.
+2. In `TruflationTester.sol`, ensure you're using the latest Chainlink oracle addresses for Base.
+3. Fund your contract with LINK on Base (get from faucets or bridges).
+4. Example network config (add to your hardhat.config.js):
+   ```js
+   base: {
+     url: "https://mainnet.base.org",
+     accounts: [process.env.PRIVATE_KEY]
+   }
